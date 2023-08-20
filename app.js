@@ -1,23 +1,21 @@
 const http = require('http');
 
-const routes = require('./routes');
+const express = require('express');
 
-const server = http.createServer(routes.handler);
+const app = express();
 
-server.listen(4000);
+//middleware1
+app.use((req, res, next) => {
+    console.log('In middleware one');
+    next();
+});
 
-// const http = require('http');
-// const server = http.createServer((req, res)=>{
-//     const url = req.url;
+//middleware2
+app.use((req, res, next) => {
+    console.log('In middleware two');
+    res.send('<h1> Hello from express</h1>');
+});
 
-//     if(url === '/home'){
-//         res.write('<h1>welcome home</h1>');
-//     }
-//     if(url === '/about'){
-//         res.write('<h1>Welcome to About Us page</h1>');
-//     }
-//     if(url === '/node'){
-//         res.write('<h1>Welcome to my Node Js project</h1>');
-//     }
-// });
-// server.listen(4000);
+const server = http.createServer(app);
+
+app.listen(3000);
