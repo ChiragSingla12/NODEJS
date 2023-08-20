@@ -6,7 +6,7 @@ const app = express();
 
 //middleware1
 app.use((req, res, next) => {
-    console.log('In middleware one');
+    console.log('In middleware one')
     next();
 });
 
