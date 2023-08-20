@@ -13,7 +13,7 @@ app.use((req, res, next) => {
 //middleware2
 app.use((req, res, next) => {
     console.log('In middleware two');
-    res.send('<h1> Hello from express</h1>');
+    res.send('<h1> Hello from express</h1>')
 });
 
 const server = http.createServer(app);
