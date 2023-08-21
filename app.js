@@ -4,18 +4,16 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
 
-app.use('/add-product', (req, res, next) => {
-    res.send('<form action="/product" method="POST"><input type="text" name="title"><input type="number" name="title"><button type="submit">Add Product</button></form>')
-});
+//Filtering => route starts with /admin/.. go to this file and execute the route inside it
+app.use('/admin', adminRoutes);
+app.use('/shop',shopRoutes);
 
-app.post('/product', (req, res, next) => {
-    console.log(req.body);
-    res.redirect('/');
-});
-
-app.use('/', (req, res, next) => {
-    res.send('<h1>Hello buddy , I am from express.js!</h1>');
+//error page
+app.use((req, res, next) => {
+    res.status(404).send('<h1> Page not found </h1>');
 });
 
 app.listen(3000);
